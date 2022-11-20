@@ -5,6 +5,9 @@ import com.rafu.libraryservice.erros.NotFoundException;
 import com.rafu.libraryservice.services.IBookService;
 import com.rafu.libraryservice.vo.requests.BookRequest;
 import com.rafu.libraryservice.vo.responses.BookResponse;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +18,26 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping(value = "/books", name = "Books Rest Controller")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@OpenAPIDefinition
+@Tag(name = "Book rest controller")
 public class BookController {
     private final IBookService service;
     private final ModelMapper mapper;
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookResponse> findById(@PathVariable final Long id) {
+    @Operation(summary = "Retrieve a book information")
+    public ResponseEntity<BookResponse> findById(
+            @RequestHeader(required = true, name = "Authorization") final String authorization,
+            @PathVariable final Long id
+    ) {
         return service.findById(id).map(b -> ResponseEntity.ok(this.toResponse(b))).orElseThrow(() -> new NotFoundException("Book"));
     }
 
     @GetMapping
-    public ResponseEntity<List<BookResponse>> findAll() {
+    @Operation(summary = "Retrieve all books information")
+    public ResponseEntity<List<BookResponse>> findAll(@RequestHeader(required = true, name = "Authorization") final String authorization) {
         return ResponseEntity.ok().body(
                 this.service
                         .findAll()
@@ -38,19 +48,32 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<BookResponse> post(@RequestBody final BookRequest request) {
+    @Operation(summary = "Create a book")
+    public ResponseEntity<BookResponse> post(
+            @RequestHeader(required = true, name = "Authorization") final String authorization,
+            @RequestBody final BookRequest request
+    ) {
         final var book = service.create(toBook(request));
         return ResponseEntity.ok().body(this.toResponse(book));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BookResponse> put(@PathVariable final Long id, @RequestBody final BookRequest request) {
+    @Operation(summary = "Update a book")
+    public ResponseEntity<BookResponse> put(
+            @RequestHeader(required = true, name = "Authorization") final String authorization,
+            @PathVariable final Long id,
+            @RequestBody final BookRequest request
+    ) {
         final var book = service.update(id, toBook(request));
         return ResponseEntity.ok().body(this.toResponse(book));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<BookResponse> delete(@PathVariable final Long id) {
+    @Operation(summary = "Delete a book")
+    public ResponseEntity<BookResponse> delete(
+            @RequestHeader(required = true, name = "Authorization") final String authorization,
+            @PathVariable final Long id
+    ) {
         service.delete(id);
         return ResponseEntity.accepted().build();
     }

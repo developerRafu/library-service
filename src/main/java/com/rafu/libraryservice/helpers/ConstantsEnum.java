@@ -9,8 +9,9 @@ public enum ConstantsEnum {
     POST_METHOD("POST"),
     USERS("users"),
     LOGIN("login"),
-    SWAGGER_UI("swagger-ui"),
-    GET_METHOD("GET");
+    SWAGGER_UI("swagger"),
+    GET_METHOD("GET"),
+    API_DOCS("api-docs");
     private final String value;
 
     ConstantsEnum(String value) {

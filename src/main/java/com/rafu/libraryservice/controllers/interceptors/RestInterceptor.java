@@ -24,9 +24,7 @@ public class RestInterceptor implements AsyncHandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (isNotRequiredAuthRequest(request)) {
-            return true;
-        } else {
+        if (!isNotRequiredAuthRequest(request)) {
             validateAuthorization(request);
         }
         return true;
@@ -45,7 +43,8 @@ public class RestInterceptor implements AsyncHandlerInterceptor {
     }
 
     private boolean isSwaggerRequest(HttpServletRequest request) {
-        return request.getRequestURI().contains(SWAGGER_UI.getValue()) && Objects.equals(request.getMethod(), GET_METHOD.getValue());
+        return (request.getRequestURI().contains(SWAGGER_UI.getValue()) || request.getRequestURI().contains(API_DOCS.getValue()))
+                && Objects.equals(request.getMethod(), GET_METHOD.getValue());
     }
 
     private void validateAuthorization(HttpServletRequest request) {

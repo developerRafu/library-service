@@ -3,6 +3,9 @@ package com.rafu.libraryservice.controllers;
 import com.rafu.libraryservice.domain.User;
 import com.rafu.libraryservice.services.IUserService;
 import com.rafu.libraryservice.vo.requests.UserRequest;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +21,14 @@ import java.net.URI;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@OpenAPIDefinition
+@Tag(name = "User rest controller")
 public class UserService {
     private final IUserService service;
     private final ModelMapper mapper;
 
     @PostMapping
+    @Operation(summary = "Create new user")
     public ResponseEntity<Void> post(@RequestBody final UserRequest request) {
         final var user = service.create(toUser(request));
         URI uri = ServletUriComponentsBuilder
