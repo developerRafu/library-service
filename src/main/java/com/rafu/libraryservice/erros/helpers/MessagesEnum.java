@@ -10,7 +10,8 @@ public enum MessagesEnum {
     NOT_AUTHORIZED("You are not authorized to access this resource"),
     WRONG_PASSWORD("The password is wrong"),
     INVALID_HEADER("The authorization header is missing or invalid"),
-    INTERNAL_SERVER_ERROR("Internal server error");
+    INTERNAL_SERVER_ERROR("Internal server error"),
+    INVALID_REQUEST_PARAMETER("Invalid requet parameter");
     private final String message;
 
     MessagesEnum(final String message) {

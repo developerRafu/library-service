@@ -12,8 +12,17 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +38,7 @@ public class BookController {
     @GetMapping("/{id}")
     @Operation(summary = "Retrieve a book information")
     public ResponseEntity<BookResponse> findById(
-            @RequestHeader(required = true, name = "Authorization") final String authorization,
+            @RequestHeader(name = "Authorization") final String authorization,
             @PathVariable final Long id
     ) {
         return service.findById(id).map(b -> ResponseEntity.ok(this.toResponse(b))).orElseThrow(() -> new NotFoundException("Book"));
@@ -37,7 +46,7 @@ public class BookController {
 
     @GetMapping
     @Operation(summary = "Retrieve all books information")
-    public ResponseEntity<List<BookResponse>> findAll(@RequestHeader(required = true, name = "Authorization") final String authorization) {
+    public ResponseEntity<List<BookResponse>> findAll(@RequestHeader(name = "Authorization") final String authorization) {
         return ResponseEntity.ok().body(
                 this.service
                         .findAll()
@@ -50,8 +59,8 @@ public class BookController {
     @PostMapping
     @Operation(summary = "Create a book")
     public ResponseEntity<BookResponse> post(
-            @RequestHeader(required = true, name = "Authorization") final String authorization,
-            @RequestBody final BookRequest request
+            @RequestHeader(name = "Authorization") final String authorization,
+            @RequestBody @Valid final BookRequest request
     ) {
         final var book = service.create(toBook(request));
         return ResponseEntity.ok().body(this.toResponse(book));
@@ -60,7 +69,7 @@ public class BookController {
     @PutMapping("/{id}")
     @Operation(summary = "Update a book")
     public ResponseEntity<BookResponse> put(
-            @RequestHeader(required = true, name = "Authorization") final String authorization,
+            @RequestHeader(name = "Authorization") final String authorization,
             @PathVariable final Long id,
             @RequestBody final BookRequest request
     ) {
@@ -71,7 +80,7 @@ public class BookController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a book")
     public ResponseEntity<BookResponse> delete(
-            @RequestHeader(required = true, name = "Authorization") final String authorization,
+            @RequestHeader(name = "Authorization") final String authorization,
             @PathVariable final Long id
     ) {
         service.delete(id);

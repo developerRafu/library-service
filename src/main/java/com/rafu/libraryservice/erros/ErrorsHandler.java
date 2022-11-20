@@ -3,16 +3,18 @@ package com.rafu.libraryservice.erros;
 import com.rafu.libraryservice.erros.helpers.InternalErrorsEnum;
 import com.rafu.libraryservice.erros.helpers.MessagesEnum;
 import com.rafu.libraryservice.erros.models.DefaultError;
-import com.rafu.libraryservice.vo.InvalidHeaderException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @ControllerAdvice
@@ -101,6 +103,28 @@ public class ErrorsHandler {
                 .code(HttpStatus.BAD_REQUEST.value())
                 .build();
         return ResponseEntity.status(error.getCode()).body(error);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<DefaultError> handleMethodArgumentNotValidException(
+            final MethodArgumentNotValidException ex,
+            final WebRequest request
+    ) {
+        log.error(InternalErrorsEnum.INTERNAL_ERROR.getFormattedMessage(ex.getClass().getName()), ex.getCause());
+        final var error = DefaultError
+                .builder()
+                .message(MessagesEnum.INVALID_REQUEST_PARAMETER.getFormattedMessage())
+                .code(HttpStatus.BAD_REQUEST.value())
+                .details(getInvalidParamters(ex.getFieldErrors()))
+                .build();
+        return ResponseEntity.status(error.getCode()).body(error);
+    }
+
+    private List<String> getInvalidParamters(final List<FieldError> fieldErrors) {
+        return fieldErrors
+                .stream()
+                .map(f -> "Invalid value '" + f.getRejectedValue() + "' for field: '" + f.getField() + "'")
+                .collect(Collectors.toList());
     }
 
     @ExceptionHandler(Exception.class)

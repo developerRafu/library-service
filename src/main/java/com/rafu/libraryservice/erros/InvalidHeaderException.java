@@ -1,4 +1,4 @@
-package com.rafu.libraryservice.vo;
+package com.rafu.libraryservice.erros;
 
 import lombok.Getter;
 

@@ -1,8 +1,8 @@
 package com.rafu.libraryservice.controllers.interceptors;
 
+import com.rafu.libraryservice.erros.InvalidHeaderException;
 import com.rafu.libraryservice.erros.UnauthorizedException;
 import com.rafu.libraryservice.services.ILoginService;
-import com.rafu.libraryservice.vo.InvalidHeaderException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
-import static com.rafu.libraryservice.helpers.ConstantsEnum.*;
+import static com.rafu.libraryservice.helpers.ConstantsEnum.API_DOCS;
+import static com.rafu.libraryservice.helpers.ConstantsEnum.AUTHORIZATION_HEADER;
+import static com.rafu.libraryservice.helpers.ConstantsEnum.BEARER;
+import static com.rafu.libraryservice.helpers.ConstantsEnum.GET_METHOD;
+import static com.rafu.libraryservice.helpers.ConstantsEnum.LOGIN;
+import static com.rafu.libraryservice.helpers.ConstantsEnum.POST_METHOD;
+import static com.rafu.libraryservice.helpers.ConstantsEnum.SWAGGER_UI;
+import static com.rafu.libraryservice.helpers.ConstantsEnum.USERS;
 import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Component
