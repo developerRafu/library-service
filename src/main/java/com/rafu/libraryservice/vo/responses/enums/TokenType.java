@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum TokenType {
-  BEARER("Bearer ");
+  BEARER("Bearer");
   private final String desc;
 
   TokenType(final String desc) {

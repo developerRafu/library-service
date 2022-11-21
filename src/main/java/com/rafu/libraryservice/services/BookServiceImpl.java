@@ -3,12 +3,14 @@ package com.rafu.libraryservice.services;
 import com.rafu.libraryservice.domain.Book;
 import com.rafu.libraryservice.erros.BookAlreadyCreate;
 import com.rafu.libraryservice.erros.NotFoundException;
+import com.rafu.libraryservice.models.BookFilter;
 import com.rafu.libraryservice.repositories.BookRepository;
-import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -28,10 +30,12 @@ public class BookServiceImpl implements IBookService {
   public Book update(final Long id, final Book book) {
     book.setId(id);
     final var bookFound = this.findById(book.getId());
+
     if (bookFound.isEmpty()) {
       throw new NotFoundException(book.getName());
     }
-    return repository.save(book);
+
+    return create(book);
   }
 
   @Override
@@ -40,8 +44,8 @@ public class BookServiceImpl implements IBookService {
   }
 
   @Override
-  public List<Book> findAll() {
-    return repository.findAll();
+  public Page<Book> findAll(final BookFilter filter) {
+    return repository.findAllByFilter(filter.getName(), filter.getRequest());
   }
 
   @Override
