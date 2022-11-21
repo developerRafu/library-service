@@ -1,7 +1,6 @@
 package com.rafu.libraryservice.services;
 
 import com.rafu.libraryservice.components.JWTUtil;
-import com.rafu.libraryservice.components.SecretProperties;
 import com.rafu.libraryservice.erros.WrongPasswordException;
 import com.rafu.libraryservice.helpers.ConstantsEnum;
 import com.rafu.libraryservice.helpers.UserHelper;
@@ -21,16 +20,12 @@ class LoginServiceImplTest {
     IUserService userService;
     JWTUtil jwt;
     ILoginService service;
-    SecretProperties secretProperties;
 
     @BeforeEach
     void setUp() {
         userService = mock(UserServiceImpl.class);
-        secretProperties = mock(SecretProperties.class);
-        jwt = spy(new JWTUtil(secretProperties));
+        jwt = mock(JWTUtil.class);
         service = new LoginServiceImpl(userService, jwt);
-        when(secretProperties.getSecret()).thenReturn(ConstantsEnum.MOCKED_SECRET.getValue());
-        when(secretProperties.getExpiration()).thenReturn(Long.valueOf(ConstantsEnum.MOCKED_EXPIRATION.getValue()));
     }
 
     @Nested
@@ -69,10 +64,9 @@ class LoginServiceImplTest {
 
         @Test
         void shouldReturnTrueWhenTokenIsValid() {
-            final var token = jwt.getToken(ConstantsEnum.MOCKED_EMAIL.getValue());
+            when(jwt.isValidToken(any())).thenReturn(true);
             when(userService.findByEmail(any())).thenReturn(Optional.of(UserHelper.getUser()));
-            when(jwt.isValidToken(any())).thenCallRealMethod();
-            final var result = service.isAuthorized("Bearer " + token);
+            final var result = service.isAuthorized(getToken().getToken());
             assertTrue(result);
         }
 
