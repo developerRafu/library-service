@@ -1,8 +1,7 @@
 package com.rafu.libraryservice.vo.requests;
 
-import lombok.*;
-
 import javax.validation.constraints.NotNull;
+import lombok.*;
 
 @Getter
 @Setter
@@ -10,10 +9,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Builder
 public class UserRequest {
-    @NotNull
-    private String name;
-    @NotNull
-    private String email;
-    @NotNull
-    private String password;
+  @NotNull private String name;
+  @NotNull private String email;
+  @NotNull private String password;
 }

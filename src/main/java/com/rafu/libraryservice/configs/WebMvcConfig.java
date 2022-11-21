@@ -10,10 +10,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WebMvcConfig implements WebMvcConfigurer {
-    private final RestInterceptor restInterceptor;
+  private final RestInterceptor restInterceptor;
 
-    @Override
-    public void addInterceptors(final InterceptorRegistry registry) {
-        registry.addInterceptor(restInterceptor);
-    }
+  @Override
+  public void addInterceptors(final InterceptorRegistry registry) {
+    registry.addInterceptor(restInterceptor);
+  }
 }

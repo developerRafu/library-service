@@ -4,10 +4,10 @@ import lombok.Getter;
 
 @Getter
 public enum TokenType {
-    BEARER("Bearer ");
-    private final String desc;
+  BEARER("Bearer ");
+  private final String desc;
 
-    TokenType(final String desc) {
-        this.desc = desc;
-    }
+  TokenType(final String desc) {
+    this.desc = desc;
+  }
 }

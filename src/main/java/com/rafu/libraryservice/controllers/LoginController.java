@@ -23,21 +23,22 @@ import org.springframework.web.bind.annotation.RestController;
 @OpenAPIDefinition
 @Tag(name = "Login rest controller")
 public class LoginController {
-    private final ILoginService service;
+  private final ILoginService service;
 
-    @PostMapping
-    @Operation(summary = "Log in")
-    public ResponseEntity<TokenResponse> login(@RequestBody final LoginRequest request) {
-        return ResponseEntity.ok().body(service.login(request));
-    }
+  @PostMapping
+  @Operation(summary = "Log in")
+  public ResponseEntity<TokenResponse> login(@RequestBody final LoginRequest request) {
+    return ResponseEntity.ok().body(service.login(request));
+  }
 
-    @GetMapping
-    @Operation(summary = "Validate token")
-    public ResponseEntity<Boolean> get(@RequestHeader(required = true, name = "Authorization") final String authorization) {
-        final var isAuthorized = service.isAuthorized(authorization);
-        if(!isAuthorized){
-            throw new UnauthorizedException();
-        }
-        return ResponseEntity.ok().body(Boolean.TRUE);
+  @GetMapping
+  @Operation(summary = "Validate token")
+  public ResponseEntity<Boolean> get(
+      @RequestHeader(required = true, name = "Authorization") final String authorization) {
+    final var isAuthorized = service.isAuthorized(authorization);
+    if (!isAuthorized) {
+      throw new UnauthorizedException();
     }
+    return ResponseEntity.ok().body(Boolean.TRUE);
+  }
 }

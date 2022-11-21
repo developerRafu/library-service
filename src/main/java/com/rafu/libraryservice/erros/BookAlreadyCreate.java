@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public class BookAlreadyCreate extends RuntimeException {
-    private final String name;
+  private final String name;
 
-    public BookAlreadyCreate(final String name) {
-        this.name = name;
-    }
+  public BookAlreadyCreate(final String name) {
+    this.name = name;
+  }
 }

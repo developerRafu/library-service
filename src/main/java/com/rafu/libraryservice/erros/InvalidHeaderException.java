@@ -4,10 +4,10 @@ import lombok.Getter;
 
 @Getter
 public class InvalidHeaderException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
-    private final String header;
+  private static final long serialVersionUID = 1L;
+  private final String header;
 
-    public InvalidHeaderException(final String header) {
-        this.header = header;
-    }
+  public InvalidHeaderException(final String header) {
+    this.header = header;
+  }
 }

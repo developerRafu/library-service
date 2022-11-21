@@ -12,20 +12,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class DbConfigs {
-    private final IBookService bookService;
-    private final IUserService userService;
+  private final IBookService bookService;
+  private final IUserService userService;
 
-    @Bean
-    public boolean createBook() {
-        final var book = Book.builder().name("Clean Code").build();
-        final var user = User
-                .builder()
-                .email("rafu@mail.com")
-                .name("Rafu Henrique")
-                .password("123456")
-                .build();
-        bookService.create(book);
-        userService.create(user);
-        return true;
-    }
+  @Bean
+  public boolean createBook() {
+    final var book = Book.builder().name("Clean Code").build();
+    final var user =
+        User.builder().email("rafu@mail.com").name("Rafu Henrique").password("123456").build();
+    bookService.create(book);
+    userService.create(user);
+    return true;
+  }
 }
