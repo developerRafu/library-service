@@ -1,7 +1,7 @@
 package com.rafu.libraryservice.configs;
 
-import com.rafu.libraryservice.domain.Book;
-import com.rafu.libraryservice.domain.User;
+import com.rafu.libraryservice.models.domain.Book;
+import com.rafu.libraryservice.models.domain.User;
 import com.rafu.libraryservice.services.IBookService;
 import com.rafu.libraryservice.services.IUserService;
 import lombok.RequiredArgsConstructor;

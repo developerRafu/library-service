@@ -1,4 +1,4 @@
-package com.rafu.libraryservice.vo.requests;
+package com.rafu.libraryservice.models.vo.requests;
 
 import javax.validation.constraints.NotNull;
 import lombok.*;

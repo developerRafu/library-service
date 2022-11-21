@@ -1,6 +1,6 @@
 package com.rafu.libraryservice.repositories;
 
-import com.rafu.libraryservice.domain.User;
+import com.rafu.libraryservice.models.domain.User;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

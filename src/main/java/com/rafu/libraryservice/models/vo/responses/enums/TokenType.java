@@ -1,4 +1,4 @@
-package com.rafu.libraryservice.vo.responses.enums;
+package com.rafu.libraryservice.models.vo.responses.enums;
 
 import lombok.Getter;
 

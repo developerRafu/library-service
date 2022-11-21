@@ -1,16 +1,15 @@
 package com.rafu.libraryservice.services;
 
-import com.rafu.libraryservice.domain.Book;
 import com.rafu.libraryservice.erros.BookAlreadyCreate;
 import com.rafu.libraryservice.erros.NotFoundException;
-import com.rafu.libraryservice.models.BookFilter;
+import com.rafu.libraryservice.models.domain.Book;
+import com.rafu.libraryservice.models.filters.BookFilter;
 import com.rafu.libraryservice.repositories.BookRepository;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

@@ -1,8 +1,8 @@
 package com.rafu.libraryservice.controllers;
 
-import com.rafu.libraryservice.domain.User;
+import com.rafu.libraryservice.models.domain.User;
+import com.rafu.libraryservice.models.vo.requests.UserRequest;
 import com.rafu.libraryservice.services.IUserService;
-import com.rafu.libraryservice.vo.requests.UserRequest;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

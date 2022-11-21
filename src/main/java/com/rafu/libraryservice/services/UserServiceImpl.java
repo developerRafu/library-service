@@ -1,7 +1,7 @@
 package com.rafu.libraryservice.services;
 
-import com.rafu.libraryservice.domain.User;
 import com.rafu.libraryservice.erros.EmailInUseException;
+import com.rafu.libraryservice.models.domain.User;
 import com.rafu.libraryservice.repositories.UserRespository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;

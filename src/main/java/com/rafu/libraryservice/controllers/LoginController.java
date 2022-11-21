@@ -1,9 +1,9 @@
 package com.rafu.libraryservice.controllers;
 
 import com.rafu.libraryservice.erros.UnauthorizedException;
+import com.rafu.libraryservice.models.vo.requests.LoginRequest;
+import com.rafu.libraryservice.models.vo.responses.TokenResponse;
 import com.rafu.libraryservice.services.ILoginService;
-import com.rafu.libraryservice.vo.requests.LoginRequest;
-import com.rafu.libraryservice.vo.responses.TokenResponse;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

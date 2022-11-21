@@ -1,7 +1,6 @@
-package com.rafu.libraryservice.vo.requests;
+package com.rafu.libraryservice.models.vo.responses;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import javax.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -10,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BookRequest {
-  @NotNull private String name;
+public class BookResponse {
+  private Long id;
+  private String name;
 }

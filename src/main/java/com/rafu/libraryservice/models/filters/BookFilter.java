@@ -1,4 +1,4 @@
-package com.rafu.libraryservice.models;
+package com.rafu.libraryservice.models.filters;
 
 import lombok.*;
 
@@ -8,6 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class BookFilter extends BaseFilter {
-    private String name;
-    private Long id;
+  private String name;
+  private Long id;
 }

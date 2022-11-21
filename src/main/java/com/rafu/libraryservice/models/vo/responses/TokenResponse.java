@@ -1,4 +1,4 @@
-package com.rafu.libraryservice.vo.responses;
+package com.rafu.libraryservice.models.vo.responses;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -8,8 +8,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@EqualsAndHashCode
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BookResponse {
-  private Long id;
-  private String name;
+public class TokenResponse {
+  private String token;
+  private String type;
 }

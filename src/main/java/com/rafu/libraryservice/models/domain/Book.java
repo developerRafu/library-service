@@ -1,8 +1,7 @@
-package com.rafu.libraryservice.domain;
-
-import lombok.*;
+package com.rafu.libraryservice.models.domain;
 
 import javax.persistence.*;
+import lombok.*;
 
 @Getter
 @Setter
@@ -13,9 +12,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "TAB_BOOK")
 public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    private String name;
+  private String name;
 }

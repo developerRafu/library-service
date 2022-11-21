@@ -29,7 +29,8 @@ public class RestInterceptor implements AsyncHandlerInterceptor {
   private final ILoginService loginService;
 
   @Override
-  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+  public boolean preHandle(
+      HttpServletRequest request, HttpServletResponse response, Object handler) {
     if (!isNotRequiredAuthRequest(request)) {
       validateAuthorization(request);
     }

@@ -1,4 +1,4 @@
-package com.rafu.libraryservice.domain;
+package com.rafu.libraryservice.models.domain;
 
 import javax.persistence.*;
 import lombok.*;

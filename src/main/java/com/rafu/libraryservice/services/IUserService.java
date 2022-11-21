@@ -1,6 +1,6 @@
 package com.rafu.libraryservice.services;
 
-import com.rafu.libraryservice.domain.User;
+import com.rafu.libraryservice.models.domain.User;
 import java.util.Optional;
 
 public interface IUserService {
